@@ -1,3 +1,4 @@
+import { ErrorMessage } from "../models/errorMessages";
 import { BuddleForFreeConfig, BulkDiscountConfig, BuyXForYConfig, PriceRule, PriceRuleTypeEnum } from "../models/priceRule";
 import { Product, ProductSKUEnum } from "../models/product";
 import { IPriceService } from "./interfaces/priceService";
@@ -17,7 +18,7 @@ export class PriceService implements IPriceService {
         let total = 0;
         const product: Product | undefined = this.productService.find(sku);
         if (!product) {
-            throw new Error("Failed to find product in the catalog");
+            throw new Error(ErrorMessage.FAILED_TO_FIND_PRODUCT);
         }
         const count = boughtItemsCount[sku as ProductSKUEnum];
         if (!rule) {
@@ -47,7 +48,7 @@ export class PriceService implements IPriceService {
 
 export const calculateBuyXForY = (count: number, price: number, config: BuyXForYConfig): number => {
     if (config.x < config.y) {
-        throw new Error("Invalid configuration for rule BUY_X_FOR_Y");
+        throw new Error(`${ErrorMessage.INVALID_RULE_CONFIG} ${PriceRuleTypeEnum.BUY_X_FOR_Y}`);
     }
     const finalCount = Math.floor(count/(config.x)) * (config.y) + count%(config.x);
     return finalCount * price;
@@ -55,7 +56,7 @@ export const calculateBuyXForY = (count: number, price: number, config: BuyXForY
 
 export const calculateBulkDiscount = (count: number, price: number, config: BulkDiscountConfig): number => {
     if (config.discountedPrice > price) {
-        throw new Error("Invalid configuration for rule BULK_DISCOUNT");
+        throw new Error(`${ErrorMessage.INVALID_RULE_CONFIG} ${PriceRuleTypeEnum.BULK_DISCOUNT}`);
     }
     return count * (count > config.bulkNumber ? config.discountedPrice : price);
 }
