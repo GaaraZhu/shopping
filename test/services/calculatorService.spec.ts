@@ -1,6 +1,6 @@
 import { ErrorMessage } from "../../src/models/errorMessages";
 import { PriceRuleTypeEnum } from "../../src/models/priceRule";
-import { calculateBuddleForFree, calculateBulkDiscount, calculateBuyXForY } from "../../src/services/priceService";
+import { calculateBuddleForFree, calculateBulkDiscount, calculateBuyXForY } from "../../src/services/calculatorService";
 
 describe("price service", () => {
     describe("calculateBuyXForY", () => {
