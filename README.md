@@ -9,7 +9,7 @@ A checkout system for DiUS computer computer store!
 
 ## How it works
 ### checkout flow
- ![checkout flow](../resources/checkoutFlow.png)
+ ![checkout flow](https://github.com/GaaraZhu/shopping/blob/main/resources/checkoutFlow.png)
 
 ### data source
 There are two required data source for this system:
