@@ -1,0 +1,27 @@
+title checkout flow
+
+loop scan all products
+    user->checkout: scan a product
+    checkout->+checkout: scan(sku)
+    checkout->-checkout: increase the number in the counting map
+end
+
+user->checkout: calculate total price
+checkout->+checkout: total()
+loop for each product in the counting map
+    checkout->priceService: calculate product total price
+    priceService->+priceService: calculate(...)
+    alt no rule configured for this product
+        priceService->calculatorService: calculateWithoutRules(...)
+    else BuyXForY rule configured
+        priceService->calculatorService: calculateBuyXForY(...)
+    else BulkDiscount rule configured
+        priceService->calculatorService: calculateBulkDiscount(...)
+    else BuddleForFree rule configured
+        priceService->calculatorService: calculateBuddleForFree(...)
+    end
+    calculatorService-->priceService: current product total price
+    priceService-->checkout: current product total price
+    checkout->checkout: add to final total price
+end
+checkout-->user: final total price
