@@ -1,4 +1,6 @@
 # Shopping
+[![Build Status](https://github.com/GaaraZhu/shopping/actions/workflows/build.yml/badge.svg)](https://github.com/GaaraZhu/shopping/actions/workflows/build.yml)
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 A checkout system for DiUS computer computer store!
 
