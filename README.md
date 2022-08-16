@@ -43,7 +43,7 @@ For product data, it's hardcoded for simplicity here while normally it should co
     },
 };
 ````
-For pricing rule, it could be part of the application configuration which will be passed to the checkout service at runtime:
+For pricing rule, it could be part of the application configuration which could be passed to the checkout service at runtime:
 ```
 {
     rules: [
@@ -85,7 +85,7 @@ There are three predefined pricing rules:
 * BULK_DISCOUNT
 * BUDDLE_FOR_FREE
 
-Rule configration is flexibile which means even for the same rule, differernt pricing strategy can be applied for different products. For example, for ATV it could be buy 3 for 2 while for IPD it could be buy 2 for 1. In case a new pricing rule other than those three is required, just:
+Rule configration is flexibile which means even for the same rule, differernt pricing strategy can be applied for different products. For example, for ATV it could be buy 3 for 2 while for IPD it could be buy 2 for 1. In case a new pricing rule other than these three is required, just:
 1. add a new type in the PriceRuleTypeEnum
 2. add a new calculation function in calculatorService
 3. use it in the priceService when the configured rule type matches
@@ -107,6 +107,6 @@ npm run test
 ```
 
 ### Things to improve
-* The mapping between rule type and calculation function should be moved out of priceService and priceService should just pass the time to get the corresponding function to calculate the price
-* Add rule validation to enforce the one to one mapping between product and pricing rule
+* The mapping between rule type and calculation function should be moved out of priceService and priceService should just pass the configured product rule type to get the corresponding function to calculate the price
+* Add rule validation to enforce the many to one mapping between product and pricing rule
 * A better README:)
