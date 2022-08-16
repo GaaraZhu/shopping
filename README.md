@@ -78,7 +78,12 @@ For pricing rule, it could be part of the application configuration which will b
 };
 ```
 Flexibility:
-There are three predefined pricing rules: BUY_X_FOR_Y, BULK_DISCOUNT, BUDDLE_FOR_FREE. Rule configration is flexibile which means even for the same rule, differernt pricing strategy can be applied for different products. For example, for ATV it could be buy 3 for 2 while for IPD it could be buy 2 for 1. In case a new pricing rule other than those three is required, just:
+There are three predefined pricing rules:
+* BUY_X_FOR_Y
+* BULK_DISCOUNT
+* BUDDLE_FOR_FREE
+
+Rule configration is flexibile which means even for the same rule, differernt pricing strategy can be applied for different products. For example, for ATV it could be buy 3 for 2 while for IPD it could be buy 2 for 1. In case a new pricing rule other than those three is required, just:
 1. add a new type in the PriceRuleTypeEnum
 2. add a new calculation function in calculatorService
 3. use it in the priceService when the configured rule type matches
