@@ -1,6 +1,6 @@
 import { ErrorMessage } from "../../src/models/errorMessages";
 import { PriceRuleTypeEnum } from "../../src/models/priceRule";
-import { calculateBulkDiscount, calculateBuyXForY } from "../../src/services/priceService";
+import { calculateBuddleForFree, calculateBulkDiscount, calculateBuyXForY } from "../../src/services/priceService";
 
 describe("price service", () => {
     describe("calculateBuyXForY", () => {
@@ -85,6 +85,35 @@ describe("price service", () => {
                 } catch (err) {
                     expect(err).toEqual(testCase.expectedError);
                 }
+            });
+          });
+    });
+
+    describe("calculateBuddleForFree", () => {
+        const testCases = [
+            {
+                count: 6,
+                price: 20,
+                targetProductCount: 3,
+                expectedTotal: 60,
+            },
+            {
+                count: 3,
+                price: 20,
+                targetProductCount: 6,
+                expectedTotal: 0,
+            },
+            {
+                count: 3,
+                price: 20,
+                targetProductCount: 3,
+                expectedTotal: 0,
+            },
+        ];
+
+        testCases.forEach((testCase) => {
+            it(JSON.stringify(testCase), async () => {
+                expect(calculateBuddleForFree(testCase.count, testCase.price, testCase.targetProductCount)).toBe(testCase.expectedTotal);
             });
           });
     });

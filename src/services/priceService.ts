@@ -37,7 +37,7 @@ export class PriceService implements IPriceService {
             case PriceRuleTypeEnum.BUDDLE_FOR_FREE: {
                 const buddleForFreeRule = rule.config as BuddleForFreeConfig;
                 const targetProdCount: number | undefined = boughtItemsCount[buddleForFreeRule.skuOfTargetProd];
-                total += calculateBuddleForFree(count, product.price, buddleForFreeRule, targetProdCount);
+                total += calculateBuddleForFree(count, product.price, targetProdCount);
                 break;
             }
         }
@@ -61,7 +61,7 @@ export const calculateBulkDiscount = (count: number, price: number, config: Bulk
     return count * (count > config.bulkNumber ? config.discountedPrice : price);
 }
 
-export const calculateBuddleForFree= (count: number, price: number, config: BuddleForFreeConfig, targetProductCount: number | undefined): number => {
+export const calculateBuddleForFree= (count: number, price: number, targetProductCount: number | undefined): number => {
     if (!targetProductCount || targetProductCount === 0) {
         return count * price;
     }
