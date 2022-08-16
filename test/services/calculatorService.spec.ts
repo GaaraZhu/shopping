@@ -1,8 +1,28 @@
 import { ErrorMessage } from "../../src/models/errorMessages";
 import { PriceRuleTypeEnum } from "../../src/models/priceRule";
-import { calculateBuddleForFree, calculateBulkDiscount, calculateBuyXForY } from "../../src/services/calculatorService";
+import { calculateBuddleForFree, calculateBulkDiscount, calculateBuyXForY, calculateWithoutRules } from "../../src/services/calculatorService";
 
 describe("price service", () => {
+    describe("calculateForNoRules", () => {
+        const testCases = [
+            {
+                count: 1,
+                price: 20,
+                expectedTotal: 20,
+            },
+            {
+                count: 2,
+                price: 70,
+                expectedTotal: 140,
+            },
+        ];
+
+        testCases.forEach((testCase) => {
+            it(JSON.stringify(testCase), async () => {
+                expect(calculateWithoutRules(testCase.count, testCase.price)).toBe(testCase.expectedTotal);
+            });
+          });
+    });
     describe("calculateBuyXForY", () => {
         const testCases = [
             {

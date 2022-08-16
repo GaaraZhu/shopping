@@ -97,4 +97,29 @@ describe("checkout service", () => {
             });
           });
     });
+
+    describe("all together", () => {
+        const testCases = [
+            {
+                skus: [ProductSKUEnum.ATV, ProductSKUEnum.ATV, ProductSKUEnum.ATV, ProductSKUEnum.VGA],
+                expectedTotal: 249.00,
+            },
+            {
+                skus: [ProductSKUEnum.ATV, ProductSKUEnum.IPD, ProductSKUEnum.IPD, ProductSKUEnum.ATV, ProductSKUEnum.IPD, ProductSKUEnum.IPD, ProductSKUEnum.IPD],
+                expectedTotal: 2718.95,
+            },
+            {
+                skus: [ProductSKUEnum.MBP, ProductSKUEnum.VGA, ProductSKUEnum.IPD],
+                expectedTotal: 1949.98,
+            },
+        ];
+
+        testCases.forEach((testCase) => {
+            it(testCase.skus.toString(), async () => {
+                const checkout = new Checkout(mockedPriceRules);
+                testCase.skus.forEach(sku => checkout.scan(sku));
+                expect(checkout.total()).toBe(testCase.expectedTotal);
+            });
+          });
+    });
 });
